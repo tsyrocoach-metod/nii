@@ -184,13 +184,14 @@ b,strong{color:var(--navy)}
   @page{size:A4;margin:0}
   body{background:#fff}.bar{display:none}.deck{margin:0;max-width:none;padding:0}
   .actions{display:none}.toast{display:none}
-  .slide:not(.split){box-shadow:none;border:none;border-radius:0;margin:0;page-break-after:always;
-    width:210mm;height:297mm;aspect-ratio:auto;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .slide.split{margin:0;padding:0;page-break-after:auto}
-  .slide.split>.sheet{box-shadow:none;border:none;border-radius:0;margin:0;page-break-after:always;
-    width:210mm;height:297mm;aspect-ratio:auto;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .deck>.slide:last-child{page-break-after:auto}
-  .slide.split:last-child>.sheet:last-child{page-break-after:auto}
+  /* каждый лист = страница A4; разрыв ставим ПЕРЕД листом, поэтому после последнего его нет */
+  .slide:not(.split),.slide.split>.sheet{box-shadow:none;border:none;border-radius:0;margin:0;
+    width:210mm;height:297mm;aspect-ratio:auto;overflow:hidden;
+    break-before:page;break-after:auto;break-inside:avoid;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .slide.split{margin:0;padding:0;break-before:auto;break-after:auto}
+  /* самый первый лист документа – без разрыва перед ним */
+  .deck>.slide:first-child{break-before:auto}
 }
 </style></head>
 <body>
@@ -417,6 +418,22 @@ b,strong{color:var(--navy)}
  document.querySelectorAll('.write').forEach(function(t){var id=t.dataset.id;
   t.addEventListener('input',function(){st['t_'+id]=t.value;});});
  var b=document.getElementById('btnPrint');if(b)b.addEventListener('click',function(){window.print()});
+
+ // Перед печатью расширяем поля под их содержимое, чтобы длинные ответы не обрезались в PDF
+ function expandWrites(){
+  document.querySelectorAll('.write').forEach(function(t){
+   t.dataset._h=t.style.height;
+   t.style.height='auto';
+   t.style.height=t.scrollHeight+'px';
+  });
+ }
+ function restoreWrites(){
+  document.querySelectorAll('.write').forEach(function(t){
+   t.style.height=t.dataset._h||'';
+  });
+ }
+ window.addEventListener('beforeprint',expandWrites);
+ window.addEventListener('afterprint',restoreWrites);
 
  var QS=[
   '1. Как чаще выглядит саботаж (жду условий / ухожу в образы / суечусь мимо) и пример:',
