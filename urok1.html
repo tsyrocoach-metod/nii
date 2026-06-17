@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=860">
+
 <title>Урок 01 · Основы нейроинтуитивного интеллекта</title>
 <style>
 :root{
@@ -178,42 +179,6 @@ b,strong{color:var(--navy)}
   .deck>.slide:last-child{page-break-after:auto}
   .slide.split:last-child>.sheet:last-child{page-break-after:auto}
 }
-@media screen and (max-width:560px){
-  /* Вариант B: лист = пропорциональный A4; база шрифта листа = 10px*--fit,
-     все размеры в em, плотные слайды разбиты на подлисты (.sheet),
-     а JS-подгонка добивает остаток, чтобы контент точно влез. */
-  .deck{padding:0 12px 40px}
-  .slide:not(.split){font-size:calc(10px * var(--fit,1));line-height:1.4}
-  .slide.split .sheet{font-size:calc(10px * var(--fit,1));line-height:1.4}
-  .slide p,.slide li,.ctext,.c-intu,.c-neuro,.mini ul li,.fdef{font-size:1em;line-height:1.38}
-  h1{font-size:2em;line-height:1.06}
-  h2{font-size:1.4em}
-  h3{font-size:1.1em;margin:.8em 0 .4em}
-  .part{font-size:1.2em;padding-bottom:.6em;margin-bottom:.8em}
-  .kicker{font-size:.8em;margin-bottom:.7em}
-  .subtitle{font-size:1.2em;margin:0 0 .8em}
-  .lede{font-size:1.05em}
-  .quote{font-size:1.05em;padding:1em 1.2em 1em 2.6em;margin:1em 0}
-  .toc-h,.bb-h,.rf-h,.ta-h,.tag,.case-h,.fnote,.rc-sub{font-size:.8em}
-  .toc-row{padding:.7em 0}.toc-row b{font-size:1em}.toc-row span{width:1.8em;height:1.8em;font-size:.9em}
-  .rc-name{font-size:1.1em}
-  .frow{font-size:1.2em}.formula{padding:1.2em 1.4em;margin:1em 0 .8em}.formula .frow[style]{font-size:.95em!important}
-  .brainbox,.case,.mini,.reflect,.takeaway,.task{padding:1em 1.2em;margin:.9em 0}
-  .bb-i{padding:.7em}.layer{padding:.7em 1em;margin:.5em 0;font-size:1em}.layer span{font-size:.9em}
-  .check li{padding:.7em .8em .7em 2.8em;margin:.5em 0}
-  .write{font-size:1em;min-height:3.4em;padding:.6em .8em}
-  .actions{gap:.8em;margin:1em 0 .2em}
-  .actions button{font-size:1em;min-width:0;padding:.8em 1em}
-  .endnote{font-size:1em;padding-top:.9em}
-  .endnote-soft{font-size:.9em}
-  .todo{font-size:.85em;padding:1em 1.2em}
-  .slide::after,.slide.split>.sheet::after{font-size:.7em}
-  /* парные блоки в столбец */
-  .duo,.case-two,.bb-grid,.rcards{grid-template-columns:1fr;flex-direction:column;gap:.8em}
-  /* на мобильном уменьшаем паддинг листа и подпись-подвал */
-  .slide.split>.sheet{padding:3.4em 2.6em 4em}
-  .slide.split>.sheet::after{left:2.6em;bottom:1.4em}
-  .slide:not(.split){padding:3.4em 2.6em 4em}
 }
 </style></head>
 <body>
@@ -274,8 +239,6 @@ b,strong{color:var(--navy)}
     </div>
     <p class="bb-note">Каждый следующий слой когда-то надстроился над предыдущим. В стрессе рептильный и лимбический перехватывают управление – и неокортекс, который умеет планировать, просто не подключается. <b>Его-то мы и будем учиться включать.</b></p>
   </div>
-  </div>
-  <div class="sheet">
   <p>Когда руль перехватывают древние и быстрые механизмы выживания, способов отреагировать у нас становится всего три:</p>
   <div class="rcards">
     <div class="rcard">
@@ -311,8 +274,6 @@ b,strong{color:var(--navy)}
   <p>Есть два разных способа, которыми к нам приходит решение – и их очень легко перепутать. Большинство называет «интуицией» и то, и другое. А разница между ними определяет, придёте вы к своей цели или будете годами ходить по кругу.</p>
   <p><b>Интуиция</b> – это древний механизм выживания. Её задача – увести вас от боли и напряжения, удержать там, где знакомо и безопасно. И из интуиции вы обычно выбираете одну из трёх реакций (замри, паника или заморозка).</p>
   <p><b>Нейроинтуиция</b> – это решение из неокортекса: вы держите перед собой цель, и нервная система собирает всё, чтобы шаг за шагом к ней двигаться, даже когда страшно и нет гарантий.</p>
-  </div>
-  <div class="sheet">
   <p class="muted">Как понять, что сейчас помогает вам принимать решение: интуиция или нейроинтуиция?</p>
   <div class="duo">
     <div class="mini intu"><div class="tag">Интуиция · уводит от напряжения</div><ul>
@@ -355,12 +316,12 @@ b,strong{color:var(--navy)}
       <div class="c-neuro"><b>Нейроинтуиция:</b> видно и сложность, и конкуренцию, но внутри звучит «всё равно получится». И вы делаете шаг, собираете информацию, снова шаг – и не можете долго спать по утрам, потому что хочется быстрее за дело.</div>
     </div>
   </div>
-  </div>
-  <div class="sheet">
   <div class="reflect">
     <div class="rf-h">Вопрос к себе</div>
     <p>А что изменилось бы в вашей жизни, если бы вы умели в любой момент замечать, кто сейчас принимает решение – интуиция или вы?</p>
   </div>
+  </div>
+  <div class="sheet">
   <p class="soft">Давайте посмотрим, что может поменяться на примерах обычных жизненных ситуаций.</p>
   <div class="case">
     <div class="case-h">Ситуация дома</div>
@@ -370,8 +331,6 @@ b,strong{color:var(--navy)}
       <div class="c-neuro"><b>Нейроинтуиция:</b> страшно, но внутри ясно – сказать нужно. Напряжение не исчезает, а превращается в собранность. Вы говорите спокойно и по делу – и отношения развиваются.</div>
     </div>
   </div>
-  </div>
-  <div class="sheet">
   <div class="case">
     <div class="case-h">Ситуация на работе</div>
     <p>Предложили новый проект. Интересный, но непонятный – гарантий нет.</p>
@@ -402,8 +361,6 @@ b,strong{color:var(--navy)}
     <div class="frow" style="font-size:15px"><span class="op">×</span> скорость нервной системы</div>
     <div class="fnote">три фактора складываются, а сверху – общий «темп», на который они умножаются</div>
   </div>
-  </div>
-  <div class="sheet">
   <div class="fdefs">
     <div class="fdef"><b>Физическая адаптивность</b><span>есть ли у тела ресурс (сон, энергия, силы), чтобы выдержать новое и не «выключиться».</span></div>
     <div class="fdef"><b>Психическая устойчивость</b><span>способность не бросать и не метаться, когда тревожно и нет гарантий.</span></div>
@@ -434,10 +391,6 @@ b,strong{color:var(--navy)}
     <textarea class="write" data-id="uq1"></textarea>
     <p class="q">2. Вспомните <b>интуитивное</b> решение: вы выбирали из страха или тревоги, лишь бы убрать напряжение. К чему оно вас привело?</p>
     <textarea class="write" data-id="uq2"></textarea>
-  </div>
-  </div>
-  <div class="sheet">
-  <div class="task">
     <p class="q">3. А теперь <b>нейроинтуитивное</b>: вы пошли туда, где было непонятно и немного страшно, но внутри звучало «это моё». Чем отличались ощущения и к чему это привело?</p>
     <textarea class="write" data-id="uq3"></textarea>
     <p class="q">4. Что важного, интересного вы узнали для себя из этого урока?</p>
@@ -509,25 +462,6 @@ b,strong{color:var(--navy)}
  });
  var bs=document.getElementById('btnSave');
  if(bs)bs.addEventListener('click',function(){window.print()});
-
- // --- Вариант B: дочищаем влезание – слегка ужимаем лист, если контент не поместился ---
- function fitSheets(){
-  var mobile=window.matchMedia('(max-width:560px)').matches;
-  var sheets=document.querySelectorAll('.slide:not(.split), .slide.split>.sheet');
-  sheets.forEach(function(s){
-   if(!mobile){s.style.removeProperty('--fit');return;}
-   s.style.setProperty('--fit','1');
-   var fit=1;
-   for(var k=0;k<16 && s.scrollHeight>s.clientHeight+1 && fit>0.55;k++){
-    fit=Math.round((fit-0.04)*100)/100;
-    s.style.setProperty('--fit',String(fit));
-   }
-  });
- }
- var rT;
- window.addEventListener('resize',function(){clearTimeout(rT);rT=setTimeout(fitSheets,150);});
- window.addEventListener('load',fitSheets);
- fitSheets();
 })();
 </script>
 </body></html>
