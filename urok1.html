@@ -8,6 +8,8 @@
   --ink:#222b36;--muted:#5C6B7D;--line:rgba(184,137,59,.45);--soft:rgba(35,48,63,.14);--terra:#C56B45;
 }
 *{box-sizing:border-box}
+html{scroll-behavior:smooth}
+.slide[id],.slide.split[id]{scroll-margin-top:80px}
 body{margin:0;background:#E9ECF1;color:var(--ink);
   font-family:"Georgia","Iowan Old Style",serif;line-height:1.6;-webkit-font-smoothing:antialiased}
 .bar{position:sticky;top:0;z-index:40;display:flex;gap:10px;justify-content:flex-end;align-items:center;
@@ -39,7 +41,10 @@ h1{font-family:"Helvetica Neue",Arial,sans-serif;font-weight:800;font-size:38px;
 .toc{border-top:1px solid var(--soft);padding-top:18px}
 .toc-h{font-family:"Helvetica Neue",Arial,sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;
   font-weight:800;color:var(--gold-deep);margin-bottom:6px}
-.toc-row{display:flex;align-items:center;gap:14px;padding:15px 0;border-bottom:1px solid var(--soft)}
+.toc-row{display:flex;align-items:center;gap:14px;padding:15px 0;border-bottom:1px solid var(--soft);
+  text-decoration:none;color:inherit;cursor:pointer;transition:padding-left .15s,background .15s}
+.toc-row:hover{padding-left:8px}
+.toc-row:hover b{color:var(--gold-deep)}
 .toc-row:last-child{border-bottom:none}
 .toc-row span{width:30px;height:30px;border-radius:50%;border:1px solid var(--gold);color:var(--gold-deep);
   display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex:none;
@@ -69,11 +74,6 @@ b,strong{color:var(--navy)}
 .bb-i span{font-size:12px;color:var(--muted);display:block;margin-top:3px;font-family:"Helvetica Neue",Arial,sans-serif}
 .bb-i.neo{border-color:var(--gold);background:rgba(184,137,59,.10)}
 .bb-note{margin:0;font-size:13.5px;color:var(--muted)}
-/* chain */
-.chain{display:flex;align-items:stretch;gap:8px;margin:24px 0 6px}
-.chain-i{flex:1;background:#FBF8F1;border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center;
-  font-family:"Helvetica Neue",Arial,sans-serif;font-weight:700;font-size:13px;color:var(--navy);display:flex;align-items:center;justify-content:center}
-.chain-ar{display:flex;align-items:center;color:var(--gold);font-weight:800;font-size:20px}
 /* reaction cards */
 .rcards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:6px 0 8px}
 .rcard{border:1px solid var(--soft);border-radius:14px;padding:16px 16px 18px;background:#FBF8F1;border-top:3px solid var(--gold)}
@@ -155,13 +155,28 @@ b,strong{color:var(--navy)}
   font-family:"Helvetica Neue",Arial,sans-serif;font-size:14px;font-weight:600;padding:12px 22px;border-radius:10px;
   box-shadow:0 8px 24px rgba(35,48,63,.25);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:60}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+/* .split – прозрачный контейнер; листами всегда являются его .sheet (десктоп, печать и мобильный) */
+.slide.split{background:transparent;border:none;border-radius:0;box-shadow:none;padding:0;margin:0;
+  overflow:visible;display:block;aspect-ratio:auto;container-type:normal}
+.slide.split::before,.slide.split::after{display:none}
+.slide.split>.sheet{position:relative;background:#fff;border:1px solid var(--soft);border-radius:6px;
+  width:100%;aspect-ratio:210/297;padding:64px 56px 58px;margin:0 auto 22px;overflow:hidden;
+  box-shadow:0 8px 28px rgba(35,48,63,.10);display:flex;flex-direction:column;container-type:inline-size}
+.slide.split>.sheet::after{content:"Нейроинтуитивный интеллект · Предобучение · Урок 01";position:absolute;
+  left:56px;bottom:22px;font-family:"Helvetica Neue",Arial,sans-serif;font-size:9.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:#b9c0cb}
+.slide.split>.sheet::before{content:"";position:absolute;right:56px;bottom:20px;width:26px;height:1px;background:var(--gold);opacity:.5}
 @media print{
   @page{size:A4;margin:0}
   body{background:#fff}.bar{display:none}.deck{margin:0;max-width:none;padding:0}
   .actions{display:none}.toast{display:none}.todo{display:none}
-  .slide{box-shadow:none;border:none;border-radius:0;margin:0;page-break-after:always;
+  .slide:not(.split){box-shadow:none;border:none;border-radius:0;margin:0;page-break-after:always;
     width:210mm;height:297mm;aspect-ratio:auto;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .slide:last-child{page-break-after:auto}
+  .slide.split{margin:0;padding:0;page-break-after:auto}
+  .slide.split>.sheet{box-shadow:none;border:none;border-radius:0;margin:0;page-break-after:always;
+    width:210mm;height:297mm;aspect-ratio:auto;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .deck>.slide:last-child{page-break-after:auto}
+  .slide.split:last-child>.sheet:last-child{page-break-after:auto}
 }
 @media screen and (max-width:560px){
   /* Вариант B: лист = пропорциональный A4; база шрифта листа = 10px*--fit,
@@ -192,24 +207,14 @@ b,strong{color:var(--navy)}
   .endnote{font-size:1em;padding-top:.9em}
   .endnote-soft{font-size:.9em}
   .todo{font-size:.85em;padding:1em 1.2em}
-  .slide::after,.slide.split .sheet::after{font-size:.7em}
+  .slide::after,.slide.split>.sheet::after{font-size:.7em}
   /* парные блоки в столбец */
-  .duo,.case-two,.chain,.bb-grid,.rcards{grid-template-columns:1fr;flex-direction:column;gap:.8em}
-  .chain-ar{transform:rotate(90deg)}
-  /* родитель-обёртка .split перестаёт быть листом – листами становятся его .sheet */
-  .slide.split{aspect-ratio:auto;padding:0;border:none;border-radius:0;background:transparent;
-    box-shadow:none;overflow:visible;display:block}
-  .slide.split::before,.slide.split::after{display:none}
-  .slide.split .sheet{display:flex;flex-direction:column;position:relative;background:#fff;
-    border:1px solid var(--soft);border-radius:6px;aspect-ratio:210/297;padding:3.4em 2.6em 4em;
-    margin:0 auto 22px;overflow:visible;box-shadow:0 8px 28px rgba(35,48,63,.10)}
-  .slide.split .sheet::after{content:"НейроИнтуитивный интеллект · Предобучение · Урок 01";position:absolute;
-    left:2.6em;bottom:1.4em;font-family:"Helvetica Neue",Arial,sans-serif;letter-spacing:.14em;
-    text-transform:uppercase;color:#b9c0cb}
-  .slide:not(.split){padding:3.4em 2.6em 4em;overflow:visible}
+  .duo,.case-two,.bb-grid,.rcards{grid-template-columns:1fr;flex-direction:column;gap:.8em}
+  /* на мобильном уменьшаем паддинг листа и подпись-подвал */
+  .slide.split>.sheet{padding:3.4em 2.6em 4em}
+  .slide.split>.sheet::after{left:2.6em;bottom:1.4em}
+  .slide:not(.split){padding:3.4em 2.6em 4em}
 }
-/* .sheet на десктопе и в печати – прозрачная группа без собственной рамки */
-.sheet{display:contents}
 </style></head>
 <body>
 <div class="bar"><span class="hint">Каждый слайд – лист A4. В конце заполните задание, скопируйте ответы в чат и сохраните PDF&nbsp;→</span>
@@ -230,15 +235,15 @@ b,strong{color:var(--navy)}
     </div>
     <div class="toc">
       <div class="toc-h">В этом уроке вас ждёт</div>
-      <div class="toc-row"><span>1</span><b>Почему вы можете всё понимать, но не делать желаемое</b></div>
-      <div class="toc-row"><span>2</span><b>Разница между интуицией и нейроинтуицией</b></div>
-      <div class="toc-row"><span>3</span><b>Из чего складывается нейроинтуитивный интеллект</b></div>
-      <div class="toc-row"><span>4</span><b>Как устроена программа курса</b></div>
-      <div class="toc-row"><span>5</span><b>Рефлексия</b></div>
+      <a class="toc-row" href="#ch1"><span>1</span><b>Почему вы можете всё понимать, но не делать желаемое</b></a>
+      <a class="toc-row" href="#ch2"><span>2</span><b>Разница между интуицией и нейроинтуицией</b></a>
+      <a class="toc-row" href="#ch3"><span>3</span><b>Из чего складывается нейроинтуитивный интеллект</b></a>
+      <a class="toc-row" href="#ch4"><span>4</span><b>Как устроена программа курса</b></a>
+      <a class="toc-row" href="#ch5"><span>5</span><b>Рефлексия</b></a>
     </div>
   </div>
 </div>
-<div class="slide">
+<div class="slide" id="ch1">
   <div class="part"><span class="dot">1</span> Почему вы всё понимаете, но не действуете</div>
   <p>Начнём не с теории, а с вас и вашей реальной жизни.</p>
   <p>Бывало ли у вас так:</p>
@@ -271,13 +276,6 @@ b,strong{color:var(--navy)}
   </div>
   </div>
   <div class="sheet">
-  <div class="chain">
-    <div class="chain-i">Слишком много информации и перемен</div>
-    <div class="chain-ar">→</div>
-    <div class="chain-i">Нервная система в фоновом стрессе</div>
-    <div class="chain-ar">→</div>
-    <div class="chain-i">Решает не разум, а реакция выживания</div>
-  </div>
   <p>Когда руль перехватывают древние и быстрые механизмы выживания, способов отреагировать у нас становится всего три:</p>
   <div class="rcards">
     <div class="rcard">
@@ -307,7 +305,7 @@ b,strong{color:var(--navy)}
   <p class="muted">Если в стрессе вы реагируете любым из этих трёх способов – то, к сожалению, происходит самое важное: вы уходите от действия, не идёте к желаемому. И это – интуиция в действии (уход от напряжения). А нейроинтуиция – это когда стоит задача и ты доводишь её до конца, проходя сквозь напряжение. Давайте разбираться дальше.</p>
   </div>
 </div>
-<div class="slide split">
+<div class="slide split" id="ch2">
   <div class="sheet">
   <div class="part"><span class="dot">2</span> Разница между интуицией и нейроинтуицией</div>
   <p>Есть два разных способа, которыми к нам приходит решение – и их очень легко перепутать. Большинство называет «интуицией» и то, и другое. А разница между ними определяет, придёте вы к своей цели или будете годами ходить по кругу.</p>
@@ -393,7 +391,7 @@ b,strong{color:var(--navy)}
   <p class="soft">С помощью нейроинтуиции вы можете познакомиться с состоянием: задач вроде больше, а усталости меньше, потому что внутри спокойно. И вы будто торопите рассвет, чтобы быстрее приступить к делу.</p>
   </div>
 </div>
-<div class="slide split">
+<div class="slide split" id="ch3">
   <div class="sheet">
   <div class="part"><span class="dot">3</span> Из чего складывается нейроинтуитивный интеллект</div>
   <p>Если совсем коротко: нейроинтуитивный интеллект – это умение в нужный момент заметить, кто сейчас за рулём (реакция выживания или вы), и вернуть управление себе. Это не «чуйка» и не эзотерика, а навык. А раз навык – значит, его можно тренировать, как мышцу.</p>
@@ -415,7 +413,7 @@ b,strong{color:var(--navy)}
   <div class="quote">Представьте машину: три фактора – это исправный мотор, а скорость нервной системы – передача. Любое слабое звено тормозит всё. Поэтому смысл не в том, чтобы «качать сильное», а в том, чтобы найти и подтянуть слабое.</div>
   </div>
 </div>
-<div class="slide">
+<div class="slide" id="ch4">
   <div class="part"><span class="dot">4</span> Как устроена программа и что дальше</div>
   <p>Навык растёт слоями. Его не «понять за один вечер» – его выстраивают по частям, и каждый следующий слой опирается на предыдущий. На программе вы разбираете все факторы нейроинтуитивного интеллекта, шаг за шагом, модуль за модулем, а затем собираете их в единое целое:</p>
   <div class="layers">
@@ -427,7 +425,7 @@ b,strong{color:var(--navy)}
   </div>
   <p>Эти шаги – и есть программа нашего курса. И тогда нейроинтуиция становится не чем-то абстрактным и эзотеричным, а конкретным, сложным и важнейшим навыком вашего роста и успеха.</p>
 </div>
-<div class="slide split">
+<div class="slide split" id="ch5">
   <div class="sheet">
   <div class="part"><span class="dot">✎</span> Рефлексия и задание к этому уроку</div>
   <p class="muted">Несколько минут рефлексии превратят чтение урока в ваш личный опыт и изменение. А когда закончите – поделитесь в чате: мы лучше всего узнаём себя, отражаясь друг в друге.</p>
@@ -515,7 +513,7 @@ b,strong{color:var(--navy)}
  // --- Вариант B: дочищаем влезание – слегка ужимаем лист, если контент не поместился ---
  function fitSheets(){
   var mobile=window.matchMedia('(max-width:560px)').matches;
-  var sheets=document.querySelectorAll('.slide:not(.split), .slide.split .sheet');
+  var sheets=document.querySelectorAll('.slide:not(.split), .slide.split>.sheet');
   sheets.forEach(function(s){
    if(!mobile){s.style.removeProperty('--fit');return;}
    s.style.setProperty('--fit','1');
