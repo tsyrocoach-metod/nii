@@ -178,10 +178,11 @@ b,strong{color:var(--navy)}
 @media print{
   @page{size:A4;margin:0}
   body{background:#fff}.bar{display:none}.deck{margin:0;max-width:none;padding:0}
-  .actions{display:none}.toast{display:none}
-  .slide{box-shadow:none;border:none;border-radius:0;margin:0;page-break-after:always;
-    width:210mm;height:297mm;aspect-ratio:auto;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .slide:last-child{page-break-after:auto}
+  .actions{display:none}.toast{display:none}.todo{display:none}
+  .slide{box-shadow:none;border:none;border-radius:0;margin:0;
+    break-before:page;page-break-before:always;break-inside:avoid;page-break-inside:avoid;
+    width:210mm;height:296mm;aspect-ratio:auto;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .deck>.slide:first-child{break-before:auto;page-break-before:auto}
 }
 </style></head>
 <body>
@@ -405,6 +406,15 @@ b,strong{color:var(--navy)}
  });
  var bs=document.getElementById('btnSave');
  if(bs)bs.addEventListener('click',function(){window.print()});
+
+ // --- Поля ответов в PDF: расширяем под текст на время печати ---
+ var areas=document.querySelectorAll('.write');
+ function expand(){areas.forEach(function(t){t.dataset.h=t.style.height||'';t.style.height='auto';t.style.height=t.scrollHeight+'px';});}
+ function restore(){areas.forEach(function(t){t.style.height=t.dataset.h||'';});}
+ window.addEventListener('beforeprint',expand);
+ window.addEventListener('afterprint',restore);
+ if(window.matchMedia){var mq=window.matchMedia('print');
+  (mq.addEventListener?mq.addEventListener.bind(mq,'change'):mq.addListener.bind(mq))(function(e){e.matches?expand():restore();});}
 })();
 </script>
 </body></html>
