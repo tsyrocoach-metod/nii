@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru"><head><meta charset="utf-8">
-<meta name="viewport" content="width=860">
+<meta name="viewport" content="width=860, initial-scale=0.44, viewport-fit=cover">
 
 <title>Урок 01 · Основы нейроинтуитивного интеллекта</title>
 <style>
@@ -9,12 +9,13 @@
   --ink:#222b36;--muted:#5C6B7D;--line:rgba(184,137,59,.45);--soft:rgba(35,48,63,.14);--terra:#C56B45;
 }
 *{box-sizing:border-box}
+.bar button,.act-primary,.act-ghost,.check li,.toc-row,.write{touch-action:manipulation;-webkit-tap-highlight-color:rgba(184,137,59,.15)}
 html{scroll-behavior:smooth}
 .slide[id],.slide.split[id]{scroll-margin-top:80px}
 body{margin:0;background:#E9ECF1;color:var(--ink);-webkit-text-size-adjust:100%;text-size-adjust:100%;
   font-family:"Georgia","Iowan Old Style",serif;line-height:1.6;-webkit-font-smoothing:antialiased}
 .bar{position:sticky;top:0;z-index:40;display:flex;gap:10px;justify-content:flex-end;align-items:center;
-  padding:12px 20px;background:rgba(233,236,241,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--soft);
+  padding:12px 20px;background:#E9ECF1;border-bottom:1px solid var(--soft);
   font-family:"Helvetica Neue",Arial,sans-serif}
 .bar .hint{margin-right:auto;font-size:13px;color:var(--muted)}
 .bar button{border:1px solid var(--gold);background:transparent;color:var(--gold-deep);font-size:13px;font-weight:700;
@@ -24,11 +25,14 @@ body{margin:0;background:#E9ECF1;color:var(--ink);-webkit-text-size-adjust:100%;
 .slide{position:relative;background:#fff;border:1px solid var(--soft);border-radius:6px;
   width:100%;aspect-ratio:210/297;padding:64px 56px 58px;margin:0 auto 22px;overflow:hidden;
   box-shadow:0 8px 28px rgba(35,48,63,.10);display:flex;flex-direction:column;container-type:inline-size}
-.slide::after{content:"НейроИнтуитивный интеллект · Предобучение · Урок 01";position:absolute;left:56px;bottom:22px;
+.slide::after{content:"НИИ: Практик · Предобучение · Урок 01";position:absolute;left:56px;bottom:22px;
   font-family:"Helvetica Neue",Arial,sans-serif;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#b9c0cb}
 .slide::before{content:"";position:absolute;right:56px;bottom:20px;width:26px;height:1px;background:var(--gold);opacity:.5}
 .title{padding-top:48px}
-.brandline{border-bottom:1px solid var(--soft);padding-bottom:16px}
+.brandline{border-bottom:1px solid var(--soft);padding-bottom:16px;display:flex;align-items:center;gap:14px}
+.brandline .logo{width:56px;height:56px;flex:none;display:flex;align-items:center;justify-content:center}
+.brandline .logo img{width:100%;height:100%;object-fit:contain}
+.brandline .bl-text{display:flex;flex-direction:column}
 .brandline .course{font-family:"Helvetica Neue",Arial,sans-serif;font-weight:800;font-size:15px;color:var(--navy)}
 .brandline .author{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12px;color:var(--muted);margin-top:3px;letter-spacing:.04em}
 .title-center{flex:1;display:flex;flex-direction:column;justify-content:center}
@@ -156,6 +160,54 @@ b,strong{color:var(--navy)}
   font-family:"Helvetica Neue",Arial,sans-serif;font-size:14px;font-weight:600;padding:12px 22px;border-radius:10px;
   box-shadow:0 8px 24px rgba(35,48,63,.25);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:60}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+/* numbered points list (признаки) */
+.np{list-style:none;padding:0;margin:8px 0 14px}
+.np li{display:flex;align-items:flex-start;gap:14px;padding:11px 0;border-bottom:1px solid var(--soft);font-size:14.5px;line-height:1.4}
+.np li:last-child{border-bottom:none}
+.np .n{flex:none;width:26px;height:26px;border-radius:50%;border:1px solid var(--gold);color:var(--gold-deep);
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;
+  font-family:"Helvetica Neue",Arial,sans-serif}
+.np b{color:var(--navy)}
+/* brain table (три уровня мозга) */
+.btab{display:grid;grid-template-columns:1.1fr 1fr 1fr 1fr;gap:1px;background:var(--soft);border:1px solid var(--soft);
+  border-radius:12px;overflow:hidden;margin:10px 0 14px;font-family:"Helvetica Neue",Arial,sans-serif}
+.btab>div{background:#fff;padding:9px 11px;font-size:11.5px;line-height:1.32;color:var(--ink)}
+.btab .bh{font-weight:800;color:#fff;font-size:11px;text-align:center}
+.btab .bh.surv{background:#9c3a32}.btab .bh.limb{background:#c97a2b}.btab .bh.neo{background:var(--navy)}
+.btab .rk{font-weight:700;color:var(--muted);font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;display:flex;align-items:center}
+.btab b{color:var(--navy)}
+/* vs table (интуиция/нейроинтуиция) */
+.vstab{display:grid;grid-template-columns:0.8fr 1fr 1fr;gap:10px;margin:10px 0 14px}
+.vstab>div{padding:12px 14px;border-radius:10px;font-family:"Helvetica Neue",Arial,sans-serif;font-size:13.5px;display:flex;align-items:center;line-height:1.32}
+.vstab .vh{font-weight:800;color:#fff;justify-content:center;text-align:center;font-size:13px}
+.vstab .vh.l{background:var(--terra)}.vstab .vh.r{background:var(--navy)}
+.vstab .rk{font-weight:800;color:var(--navy);font-size:12px}
+.vstab .ci{background:rgba(197,107,69,.08);border:1px solid rgba(197,107,69,.3);color:var(--ink)}
+.vstab .cn{background:rgba(184,137,59,.10);border:1px solid var(--line);color:var(--ink)}
+/* markers two-col */
+.mk{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 14px}
+.mk .mcol{border:1px solid var(--soft);border-radius:12px;padding:14px 16px}
+.mk .mcol.intu{border-top:3px solid var(--terra);background:rgba(197,107,69,.05)}
+.mk .mcol.neuro{border-top:3px solid var(--gold);background:rgba(184,137,59,.06)}
+.mk .mh{font-family:"Helvetica Neue",Arial,sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;margin-bottom:8px}
+.mk .mcol.intu .mh{color:var(--terra)}.mk .mcol.neuro .mh{color:var(--gold-deep)}
+.mk ul{margin:0 0 8px;padding-left:16px}.mk li{font-size:12.5px;margin:5px 0;line-height:1.3}
+.mk .after{font-size:12px;color:var(--muted);font-family:"Helvetica Neue",Arial,sans-serif;border-top:1px solid var(--soft);padding-top:8px;margin-top:2px}
+.mk .after b{color:var(--navy)}
+/* ability (определение НИИ) */
+.ability{list-style:none;padding:0;margin:8px 0 14px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ability li{display:flex;align-items:center;gap:10px;padding:11px 14px;background:#FBF8F1;border:1px solid var(--soft);
+  border-radius:10px;font-family:"Helvetica Neue",Arial,sans-serif;font-weight:600;font-size:13.5px;color:var(--navy)}
+/* practice 3 steps */
+.prac{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:10px 0 12px}
+.pstep{border:1px solid var(--soft);border-radius:14px;padding:14px 16px;background:#FBF8F1;border-top:3px solid var(--gold)}
+.pstep .ph{font-family:"Helvetica Neue",Arial,sans-serif;font-weight:800;font-size:14px;color:var(--navy);margin-bottom:4px}
+.pstep .ph span{color:var(--gold-deep);font-size:11px;display:block;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+.pstep p{font-size:12.5px;margin:0 0 6px;line-height:1.35}
+.pstep ul{margin:0;padding-left:15px}.pstep li{font-size:12px;margin:3px 0}
+.prac-note{text-align:center;font-family:"Helvetica Neue",Arial,sans-serif;font-weight:700;color:var(--navy);
+  font-size:14px;margin:4px 0 0;line-height:1.4}
+.prac-note b{color:var(--gold-deep)}
 /* .split – прозрачный контейнер; листами всегда являются его .sheet (десктоп, печать и мобильный) */
 .slide.split{background:transparent;border:none;border-radius:0;box-shadow:none;padding:0;margin:0;
   overflow:visible;display:block;aspect-ratio:auto;container-type:normal}
@@ -163,7 +215,7 @@ b,strong{color:var(--navy)}
 .slide.split>.sheet{position:relative;background:#fff;border:1px solid var(--soft);border-radius:6px;
   width:100%;aspect-ratio:210/297;padding:64px 56px 58px;margin:0 auto 22px;overflow:hidden;
   box-shadow:0 8px 28px rgba(35,48,63,.10);display:flex;flex-direction:column;container-type:inline-size}
-.slide.split>.sheet::after{content:"Нейроинтуитивный интеллект · Предобучение · Урок 01";position:absolute;
+.slide.split>.sheet::after{content:"НИИ: Практик · Предобучение · Урок 01";position:absolute;
   left:56px;bottom:22px;font-family:"Helvetica Neue",Arial,sans-serif;font-size:9.5px;letter-spacing:.16em;
   text-transform:uppercase;color:#b9c0cb}
 .slide.split>.sheet::before{content:"";position:absolute;right:56px;bottom:20px;width:26px;height:1px;background:var(--gold);opacity:.5}
@@ -189,28 +241,31 @@ b,strong{color:var(--navy)}
 
 <div class="slide title">
   <div class="brandline">
-    <div class="course">Нейроинтуитивный интеллект</div>
-    <div class="author">Дмитрий Ягудин · Изабелла Найманова</div>
+    <div class="logo"><img src="data:image/png;base64,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" alt="НИИ"></div>
+    <div class="bl-text">
+      <div class="course">НейроИнтуитивный интеллект: Практик</div>
+      <div class="author">Дмитрий Ягудин · Изабелла Найманова</div>
+    </div>
   </div>
   <div class="title-center">
     <div class="title-mid">
       <div class="kicker">Предобучение · Урок 01</div>
       <h1>Основы нейроинтуитивного<br>интеллекта</h1>
-      <p class="subtitle">Почему вы можете всё знать и понимать, но всё равно не делать желаемое</p>
+      <p class="subtitle">Почему вы можете всё знать и понимать, но всё равно стоять на месте</p>
       <p class="lede">Прежде чем мы начнём программу, давайте разберёмся вместе: зачем вам нейроинтуитивный интеллект, почему «понимать» и «делать» – это совсем не одно и то же, и что изменится в вашей жизни, когда вы начинаете действовать иначе.</p>
     </div>
     <div class="toc">
       <div class="toc-h">В этом уроке вас ждёт</div>
-      <a class="toc-row" href="#ch1"><span>1</span><b>Почему вы можете всё понимать, но не делать желаемое</b></a>
+      <a class="toc-row" href="#ch1"><span>1</span><b>Почему вы можете всё понимать, но стоять на месте</b></a>
       <a class="toc-row" href="#ch2"><span>2</span><b>Разница между интуицией и нейроинтуицией</b></a>
-      <a class="toc-row" href="#ch3"><span>3</span><b>Из чего складывается нейроинтуитивный интеллект</b></a>
-      <a class="toc-row" href="#ch4"><span>4</span><b>Как устроена программа курса</b></a>
-      <a class="toc-row" href="#ch5"><span>5</span><b>Рефлексия</b></a>
+      <a class="toc-row" href="#ch3"><span>3</span><b>Что такое нейроинтуитивный интеллект</b></a>
+      <a class="toc-row" href="#ch4"><span>4</span><b>Что вас ждёт на основном курсе</b></a>
+      <a class="toc-row" href="#ch5"><span>5</span><b>Рефлексия и задание к этому уроку</b></a>
     </div>
   </div>
 </div>
 <div class="slide" id="ch1">
-  <div class="part"><span class="dot">1</span> Почему вы всё понимаете, но не действуете</div>
+  <div class="part"><span class="dot">1</span> Почему вы можете всё понимать, но стоять на месте</div>
   <p>Начнём не с теории, а с вас и вашей реальной жизни.</p>
   <p>Бывало ли у вас так:</p>
   <p>Вы давно понимаете, что нужно сделать, но почему-то не делаете. Или решаете что-то сделать или сказать сгоряча, лишь бы отпустило, а потом жалеете. Или неделями крутите в голове варианты, ни один не кажется верным, а время уходит.</p>
@@ -230,32 +285,67 @@ b,strong{color:var(--navy)}
   <div class="part"><span class="dot">2</span> Почему так происходит</div>
   <p>Это не лень и не слабость характера. У этого есть конкретная причина, и она снаружи, а не внутри вас.</p>
   <p>Примерно с 2020 года мы живём в постоянной неопределённости. Информации стало слишком много: просыпаемся с телефоном в руке, весь день в потоке новостей и решений, засыпаем опять с телефоном. Раньше за информацией охотились ради ясности – сегодня чем её больше, тем ясности меньше.</p>
+  <p>У этой эпохи неопределённости есть узнаваемые признаки:</p>
+  <ul class="np">
+    <li><span class="n">1</span><span><b>Информации стало больше, а ясности – меньше.</b></span></li>
+    <li><span class="n">2</span><span><b>Люди устали от постоянного выбора.</b></span></li>
+    <li><span class="n">3</span><span><b>Мы живём в хроническом внутреннем напряжении.</b></span></li>
+    <li><span class="n">4</span><span><b>Человек теряет контакт с собой.</b></span></li>
+    <li><span class="n">5</span><span><b>Мы застреваем между пониманием и действием.</b></span></li>
+    <li><span class="n">6</span><span><b>Перегруз стал новой нормой.</b></span></li>
+  </ul>
   <p>Постоянный выбор и перемены держат нервную систему в фоновом стрессе. А в стрессе мозг принимает решение не из той своей части, которая умеет планировать.</p>
-  <div class="brainbox">
-    <div class="bb-h">За наши решения спорят три отдела мозга – и в стрессе побеждают древние</div>
-    <div class="bb-grid">
-      <div class="bb-i"><b>Рептильный</b><span>древняя система выживания</span></div>
-      <div class="bb-i"><b>Лимбический</b><span>мозг эмоций</span></div>
-      <div class="bb-i neo"><b>Неокортекс</b><span>цель, план, фокус</span></div>
-    </div>
-    <p class="bb-note">Каждый следующий слой когда-то надстроился над предыдущим. В стрессе рептильный и лимбический перехватывают управление – и неокортекс, который умеет планировать, просто не подключается. <b>Его-то мы и будем учиться включать.</b></p>
   </div>
+  <div class="sheet">
+  <h2>Три уровня мозга и принятие решений</h2>
+  <div class="btab">
+    <div class="rk"></div>
+    <div class="bh surv">Система выживания<br>(древний мозг)</div>
+    <div class="bh limb">Лимбическая система<br>(эмоции)</div>
+    <div class="bh neo">Неокортекс<br>(префронтальная кора)</div>
+
+    <div class="rk">Функция</div>
+    <div>выживание, безопасность, гомеостаз</div>
+    <div>эмоции, мотивация, оценка значимости</div>
+    <div>осознанность, планирование, контроль</div>
+
+    <div class="rk">Что управляет</div>
+    <div>инстинкты, автоматические реакции, привычки</div>
+    <div>чувства, импульсы, эмоциональная память</div>
+    <div>мысли, анализ, внимание, воля</div>
+
+    <div class="rk">Тип решения</div>
+    <div><b>реактивное, автоматическое</b></div>
+    <div><b>эмоциональное, импульсивное</b></div>
+    <div><b>осознанное, стратегическое</b></div>
+
+    <div class="rk">Когда включается</div>
+    <div>стресс, опасность, неопределённость</div>
+    <div>тревога, сильные эмоции</div>
+    <div>безопасность, ресурс, ясность</div>
+
+    <div class="rk">Примеры реакций</div>
+    <div>замри, беги, бейся</div>
+    <div>бей / беги / замри, эмоциональные качели</div>
+    <div>выбор, стратегия, действие</div>
+  </div>
+  <p class="muted">В стрессе управление перехватывают древние отделы – и неокортекс, который умеет планировать, просто не подключается. <b>Его-то мы и будем учиться включать.</b></p>
   <p>Когда руль перехватывают древние и быстрые механизмы выживания, способов отреагировать у нас становится всего три:</p>
   <div class="rcards">
     <div class="rcard">
-      <div class="rc-name">Замри</div>
-      <div class="rc-sub">гиперконтроль</div>
-      <p>Человек застыл, как зверь, который притворился мёртвым, чтобы его не тронули. Информация идёт внутрь, но наружу, в действие, не выходит. Один вопрос в голове: быстрее бы это напряжение закончилось.</p>
+      <div class="rc-name">Гиперконтроль</div>
+      <div class="rc-sub">тип 1 · «замри»</div>
+      <p>Всё просчитать, всё предусмотреть, собрать ещё информацию, ещё подумать, ещё проанализировать. Информации становится больше, а движения – меньше. <b>Человек зависает в анализе.</b></p>
     </div>
     <div class="rcard">
-      <div class="rc-name">Паника</div>
-      <div class="rc-sub">импульсивные решения</div>
-      <p>Человек мечется и решает сгоряча, лишь бы сбросить напряжение. Готов поверить во что угодно, что обещает облегчение прямо сейчас.</p>
+      <div class="rc-name">Импульсивные решения</div>
+      <div class="rc-sub">тип 2 · «паника»</div>
+      <p>Напряжение становится слишком сильным – и человек решает быстро: резко увольняется, разрывает отношения, бросает проекты, идёт в эмоциональные качели. <b>Это побег от напряжения.</b></p>
     </div>
     <div class="rcard">
-      <div class="rc-name">Заморозка</div>
-      <div class="rc-sub">ступор</div>
-      <p>Решение внутри уже принято, но до действия так и не доходит. «А если так… а если сяк…» – та самая мысленная жвачка. Итог один: усталость и ощущение, что виноват кто-то ещё.</p>
+      <div class="rc-name">Заморозка / ступор</div>
+      <div class="rc-sub">тип 3 · самый частый</div>
+      <p>Откладывает, сомневается, не может выбрать, теряет энергию, чувствует внутренний тупик. Снаружи кажется, что «ничего не делает», но внутри идёт колоссальный перегруз.</p>
     </div>
   </div>
   </div>
@@ -275,32 +365,65 @@ b,strong{color:var(--navy)}
   <p>Есть два разных способа, которыми к нам приходит решение – и их очень легко перепутать. Большинство называет «интуицией» и то, и другое. А разница между ними определяет, придёте вы к своей цели или будете годами ходить по кругу.</p>
   <p><b>Интуиция</b> – это древний механизм выживания. Её задача – увести вас от боли и напряжения, удержать там, где знакомо и безопасно. И из интуиции вы обычно выбираете одну из трёх реакций (замри, паника или заморозка).</p>
   <p><b>Нейроинтуиция</b> – это решение из неокортекса: вы держите перед собой цель, и нервная система собирает всё, чтобы шаг за шагом к ней двигаться, даже когда страшно и нет гарантий.</p>
-  <p class="muted">Как понять, что сейчас помогает вам принимать решение: интуиция или нейроинтуиция?</p>
-  <div class="duo">
-    <div class="mini intu"><div class="tag">Интуиция · уводит от напряжения</div><ul>
-      <li>хочется, чтобы всё быстро решилось и можно перестать думать</li>
-      <li>резкое, эмоциональное решение</li>
-      <li>«нужно прямо сейчас, срочно, нельзя отложить»</li>
-      <li>сопровождается тревогой</li>
-      <li>главное – убрать напряжение</li>
-      <li>облегчение → потом откат, сомнения, усталость</li>
-    </ul></div>
-    <div class="mini neuro"><div class="tag">Нейроинтуиция · ведёт к цели</div><ul>
-      <li>ощущается как внутренняя ясность</li>
-      <li>напряжение входит как сила, а не желание сбежать</li>
-      <li>глубже дышится, спина выпрямляется</li>
-      <li>может быть страх, но нет паники и «мыслемешалки»</li>
-      <li>внутри ровно, спокойно и точно</li>
-      <li>появляется энергия на действие</li>
-    </ul></div>
+  <p class="muted">Если коротко, разницу удобно увидеть по четырём параметрам:</p>
+  <div class="vstab">
+    <div class="rk"></div>
+    <div class="vh l">Интуиция</div>
+    <div class="vh r">Нейроинтуиция</div>
+
+    <div class="rk">Цель</div>
+    <div class="ci">уйти от боли</div>
+    <div class="cn">идти к результату</div>
+
+    <div class="rk">Механизм</div>
+    <div class="ci">эмоциональная реакция</div>
+    <div class="cn">телесно-когнитивное действие</div>
+
+    <div class="rk">Состояние</div>
+    <div class="ci">страх и замер</div>
+    <div class="cn">движение и поток</div>
+
+    <div class="rk">Результат</div>
+    <div class="ci">защита</div>
+    <div class="cn">созидание</div>
   </div>
   <p class="muted">Разница в том, откуда пришло решение: из желания убрать напряжение или из ясности и движения к своему.</p>
+  </div>
+  <div class="sheet">
+  <h2>Как распознать решение по маркерам</h2>
+  <p class="muted">У каждого режима есть свои узнаваемые признаки – по ним вы поймёте, кто сейчас принимает решение.</p>
+  <div class="mk">
+    <div class="mcol intu">
+      <div class="mh">Интуитивное решение · из древнего мозга</div>
+      <ul>
+        <li>быстро;</li>
+        <li>резко;</li>
+        <li>эмоционально;</li>
+        <li>с ощущением срочности;</li>
+        <li>с тревогой;</li>
+        <li>с желанием немедленно убрать напряжение.</li>
+      </ul>
+      <div class="after">После такого решения часто остаётся: <b>откат, сомнение, хаос, усталость.</b></div>
+    </div>
+    <div class="mcol neuro">
+      <div class="mh">Нейроинтуитивное решение</div>
+      <ul>
+        <li>внутри появляется ясность;</li>
+        <li>тело не сжимается;</li>
+        <li>нет паники;</li>
+        <li>нет внутреннего шума;</li>
+        <li>решение ощущается спокойным;</li>
+        <li>появляется энергия на действие – страсть.</li>
+      </ul>
+      <div class="after">Очень важный маркер: нейроинтуитивное решение <b>не всегда комфортное, но оно внутренне точное.</b></div>
+    </div>
+  </div>
   </div>
 </div>
 <div class="slide split">
   <div class="sheet">
   <h2>Где это видно особенно чётко</h2>
-  <p class="muted">Дмитрий пришёл к этому различению не из теории. Сначала – спасательная служба, где цена решения максимальна, потом те же закономерности в бизнесе. Вот его примеры.</p>
+  <p class="muted">Дмитрий Рустамович пришёл к этому различению не из теории. Сначала – спасательная служба, где цена решения максимальна, потом те же закономерности в бизнесе. Вот его примеры.</p>
   <div class="case">
     <div class="case-h">Экстремальная ситуация</div>
     <p>Когда сила внешнего давления зашкаливает, люди делятся на три типа.</p>
@@ -353,35 +476,78 @@ b,strong{color:var(--navy)}
 </div>
 <div class="slide split" id="ch3">
   <div class="sheet">
-  <div class="part"><span class="dot">3</span> Из чего складывается нейроинтуитивный интеллект</div>
+  <div class="part"><span class="dot">3</span> Что такое нейроинтуитивный интеллект</div>
   <p>Если совсем коротко: нейроинтуитивный интеллект – это умение в нужный момент заметить, кто сейчас за рулём (реакция выживания или вы), и вернуть управление себе. Это не «чуйка» и не эзотерика, а навык. А раз навык – значит, его можно тренировать, как мышцу.</p>
-  <p>У этого навыка есть понятная «сборка». Мы записываем её как формулу – не ради математики, а чтобы видеть, из каких частей он состоит и какую часть стоит подтянуть именно вам (и развитием этих частей мы будем заниматься на курсе):</p>
-  <div class="formula">
-    <div class="frow">Нейроинтуитивный интеллект =</div>
-    <div class="frow" style="font-size:15px;margin-top:8px">( Физическая адаптивность <span class="op">+</span> Психическая устойчивость <span class="op">+</span> Зеркальное лидерство )</div>
-    <div class="frow" style="font-size:15px"><span class="op">×</span> скорость нервной системы</div>
-    <div class="fnote">три фактора складываются, а сверху – общий «темп», на который они умножаются</div>
+  <p>Если развернуть, <b>нейроинтуитивный интеллект – это способность:</b></p>
+  <ul class="ability">
+    <li>видеть;</li>
+    <li>слышать;</li>
+    <li>чувствовать;</li>
+    <li>распознавать сигналы;</li>
+    <li>соединять тело, психику и мышление;</li>
+    <li>принимать точные решения в неопределённости.</li>
+  </ul>
+  <p>У этого навыка есть и своя формула – из нескольких факторов, которые можно измерить и подтянуть. Мы обязательно разберём её с вами на курсе. Но сейчас самое главное – не формула, а <b>первый, базовый навык: научиться замечать и возвращаться к себе.</b></p>
+  <p class="muted">И начинается это не с мыслей, а с тела. Прежде чем включать нужный режим, нужно выйти из внутреннего шума и вернуть контакт с собой – через органы чувств. Это и есть первая практика.</p>
   </div>
-  <div class="fdefs">
-    <div class="fdef"><b>Физическая адаптивность</b><span>есть ли у тела ресурс (сон, энергия, силы), чтобы выдержать новое и не «выключиться».</span></div>
-    <div class="fdef"><b>Психическая устойчивость</b><span>способность не бросать и не метаться, когда тревожно и нет гарантий.</span></div>
-    <div class="fdef"><b>Зеркальное лидерство</b><span>умение оставаться при своём решении рядом с чужими эмоциями и мнениями.</span></div>
-    <div class="fdef"><b>Скорость нервной системы</b><span>ваш природный темп: кто-то решает быстро, кто-то вдумчиво. И то, и другое – нормально.</span></div>
+</div>
+<div class="slide split">
+  <div class="sheet">
+  <div class="part"><span class="dot">✎</span> Практика «Возвращение контакта»</div>
+  <p>Прежде чем учиться включать нужный режим, важно вернуться в контакт с собой – выйти из внутреннего шума через органы чувств. Эта короткая практика делается утром после пробуждения и в любой момент внутреннего перегруза. <b>По одной минуте на каждый этап.</b></p>
+  <div class="prac">
+    <div class="pstep">
+      <div class="ph"><span>Шаг 1</span>Видеть</div>
+      <p>Посмотрите вокруг. Заметьте:</p>
+      <ul>
+        <li>цвета;</li>
+        <li>формы;</li>
+        <li>свет;</li>
+        <li>пространство.</li>
+      </ul>
+      <p>Не оценивайте. Просто наблюдайте.</p>
+    </div>
+    <div class="pstep">
+      <div class="ph"><span>Шаг 2</span>Слышать</div>
+      <p>Переведите внимание в звук. Что вы слышите прямо сейчас:</p>
+      <ul>
+        <li>далёкие звуки;</li>
+        <li>близкие;</li>
+        <li>дыхание;</li>
+        <li>тишину;</li>
+        <li>пространство вокруг.</li>
+      </ul>
+    </div>
+    <div class="pstep">
+      <div class="ph"><span>Шаг 3</span>Чувствовать</div>
+      <p>Теперь внимание – в тело. Что вы чувствуете:</p>
+      <ul>
+        <li>напряжение;</li>
+        <li>тепло;</li>
+        <li>дыхание;</li>
+        <li>опору;</li>
+        <li>сердцебиение;</li>
+        <li>внутреннее состояние.</li>
+      </ul>
+    </div>
   </div>
-  <div class="quote">Представьте машину: три фактора – это исправный мотор, а скорость нервной системы – передача. Любое слабое звено тормозит всё. Поэтому смысл не в том, чтобы «качать сильное», а в том, чтобы найти и подтянуть слабое.</div>
+  <p class="prac-note">Нейроинтуитивные решения рождаются не в шуме. <b>Они рождаются в контакте с собой.</b></p>
   </div>
 </div>
 <div class="slide" id="ch4">
-  <div class="part"><span class="dot">4</span> Как устроена программа и что дальше</div>
-  <p>Навык растёт слоями. Его не «понять за один вечер» – его выстраивают по частям, и каждый следующий слой опирается на предыдущий. На программе вы разбираете все факторы нейроинтуитивного интеллекта, шаг за шагом, модуль за модулем, а затем собираете их в единое целое:</p>
+  <div class="part"><span class="dot">4</span> Что вас ждёт на основном курсе</div>
+  <p>Этот урок – вводный, вы научились <b>замечать</b>. На основном курсе вы научитесь главному: <b>включать</b> нейроинтуитивный режим и <b>направлять</b> его на свою цель. Это пять модулей, где навык собирается шаг за шагом:</p>
   <div class="layers">
-    <div class="layer"><span>01</span> Заметить свои реакции и ловушки мышления</div>
-    <div class="layer"><span>02</span> Поставить настоящую цель, а не навязанную</div>
-    <div class="layer"><span>03</span> Биология решений: как интуиция устроена внутри</div>
-    <div class="layer"><span>04</span> Обретать психическую устойчивость: держать ясность под давлением</div>
-    <div class="layer"><span>05</span> Действовать из себя, а не из чужих сценариев</div>
+    <div class="layer"><span>01</span> заметить свои реакции и ловушки мышления</div>
+    <div class="layer"><span>02</span> поставить настоящую цель, а не навязанную</div>
+    <div class="layer"><span>03</span> биология решений: как нейроинтуиция работает внутри</div>
+    <div class="layer"><span>04</span> психическая устойчивость: держать ясность под давлением</div>
+    <div class="layer"><span>05</span> действовать из себя, а не из чужих сценариев</div>
   </div>
-  <p>Эти шаги – и есть программа нашего курса. И тогда нейроинтуиция становится не чем-то абстрактным и эзотеричным, а конкретным, сложным и важнейшим навыком вашего роста и успеха.</p>
+  <div class="takeaway">
+    <div class="ta-h">К чему вы придёте</div>
+    <p>Вы начнёте <b>качественно принимать решения</b> – без бесконечного анализа, паники и откладывания. Перестанете тратить силы на тревогу и метания, а направите их в дело. И увидите <b>ощутимые изменения в жизни и бизнесе</b>: там, где раньше стояли на месте, появится движение.</p>
+  </div>
 </div>
 <div class="slide split" id="ch5">
   <div class="sheet">
@@ -406,11 +572,15 @@ b,strong{color:var(--navy)}
 </div>
 <div class="slide">
   <div class="part"><span class="dot">→</span> Что дальше</div>
-  <p>В этом уроке вы научились определять разницу между двумя режимами (интуицией и нейроинтуицией). В следующих двух вы начнёте нейроинтуицию включать и направлять.</p>
+  <p>В этом уроке вы научились главному – <b>замечать</b>: различать два режима (интуицию и нейроинтуицию), узнавать три реакции на неопределённость и возвращать контакт с собой через практику.</p>
+  <p>Это первый, базовый навык, на котором строится всё остальное. Продолжайте делать практику «Возвращение контакта» каждый день – и переходите к следующему уроку, где мы пойдём дальше: от контакта – к решению.</p>
   <div class="takeaway">
-    <div class="ta-h">Следующие шаги</div>
-    <p><b>Урок 2</b> – как телесно включать нейроинтуитивный режим.<br><br>
-    <b>Урок 3</b> – как направлять его на свою цель, а не на чужой сценарий.</p>
+    <div class="ta-h">Самое важное из урока</div>
+    <p>Решения рождаются не в шуме и не в бесконечном анализе. <b>Они рождаются в контакте с собой</b> – когда вы замечаете, кто сейчас за рулём, и возвращаете управление себе.</p>
+  </div>
+  <div class="reflect">
+    <div class="rf-h">Поделитесь в чате</div>
+    <p>Сделайте практику «Возвращение контакта» и напишите в чат, что почувствовали: что заметили, что было легко, а что – непросто. И обязательно задавайте вопросы – мы лучше всего узнаём себя, отражаясь друг в друге.</p>
   </div>
 </div>
 </div>
@@ -419,13 +589,22 @@ b,strong{color:var(--navy)}
 (function(){var KEY='nii_urok1v4';
  function load(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return{}}}
  var st=load();function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
+ // надёжный тап для iOS Safari: click + touchend (без скролл-движения), без двойного срабатывания
+ function onTap(el,fn){
+  var sx=0,sy=0,moved=false,last=0;
+  function fire(e){var now=Date.now();if(now-last<350)return;last=now;fn(e);}
+  el.addEventListener('touchstart',function(e){var t=e.touches[0];sx=t.clientX;sy=t.clientY;moved=false;},{passive:true});
+  el.addEventListener('touchmove',function(e){var t=e.touches[0];if(Math.abs(t.clientX-sx)>10||Math.abs(t.clientY-sy)>10)moved=true;},{passive:true});
+  el.addEventListener('touchend',function(e){if(!moved){e.preventDefault();fire(e);}},{passive:false});
+  el.addEventListener('click',function(e){fire(e);});
+ }
  document.querySelectorAll('.check li').forEach(function(li){var id=li.dataset.id;
   if(st['c_'+id])li.classList.add('on');
-  li.addEventListener('click',function(){li.classList.toggle('on');st['c_'+id]=li.classList.contains('on');save();});});
+  onTap(li,function(){li.classList.toggle('on');st['c_'+id]=li.classList.contains('on');save();});});
  document.querySelectorAll('.write').forEach(function(t){var id=t.dataset.id;
   if(st['t_'+id]!=null)t.value=st['t_'+id];
   t.addEventListener('input',function(){st['t_'+id]=t.value;save();});});
- var b=document.getElementById('btnPrint');if(b)b.addEventListener('click',function(){window.print()});
+ var b=document.getElementById('btnPrint');if(b)onTap(b,function(){window.print()});
 
  // --- Сбор и копирование ответов ---
  var QS=[
@@ -448,7 +627,7 @@ b,strong{color:var(--navy)}
   setTimeout(function(){t.classList.remove('show');setTimeout(function(){t.remove();},250);},2200);
  }
  var bc=document.getElementById('btnCopy');
- if(bc)bc.addEventListener('click',function(){
+ if(bc)onTap(bc,function(){
   var text=buildText();
   function fallback(){
    var ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
@@ -462,7 +641,7 @@ b,strong{color:var(--navy)}
   }else{fallback();}
  });
  var bs=document.getElementById('btnSave');
- if(bs)bs.addEventListener('click',function(){window.print()});
+ if(bs)onTap(bs,function(){window.print()});
 
  // --- Поля ответов в PDF: расширяем под текст на время печати ---
  var areas=document.querySelectorAll('.write');
